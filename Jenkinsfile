@@ -1,10 +1,10 @@
 pipeline {
     agent any
-
+/*
     tools {
         maven 'default'
     }
-
+*/
     stages {
         stage('build') {
             steps {
@@ -20,11 +20,13 @@ pipeline {
 
         stage('deploy docker image') {
             steps {
-                checkout scm
-                docker.withRegistry('https://docker.adeo.no:5000/') {
-                    def image = docker.build("nais-test:1.0.${env.BUILD_ID}")
-                    image.push()
-                    image.push 'latest'
+                script {
+                    checkout scm
+                    docker.withRegistry('https://docker.adeo.no:5000/') {
+                        def image = docker.build("nais-test:1.0.${env.BUILD_ID}")
+                        image.push()
+                        image.push 'latest'
+                    }
                 }
             }
         }
@@ -51,14 +53,14 @@ pipeline {
 
         }
 
-        post {
-            always {
-                archive 'target/*.jar'
-                deleteDir()
-            }
 
+    }
+
+    post {
+        always {
+            archive 'target/*.jar'
+            deleteDir()
         }
-
 
     }
 }
