@@ -45,9 +45,9 @@ pipeline {
         stage('deploy to nice') {
             steps {
                 script {
-                    withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: 'nais-user2', usernameVariable: "NAIS_USERNAME", passwordVariable: "NAIS_PASSWORD"]]) {
+
                         sh "nais deploy -c preprod-fss -z fss -a nais-test -v 1.0.${env.BUILD_ID} --skip-fasit --wait"
-                    }
+
                 }
             }
 
