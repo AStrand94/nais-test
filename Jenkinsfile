@@ -34,10 +34,10 @@ pipeline {
         stage('deploy nais.yaml to nexus m2internal') {
             steps {
                 script {
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'nexus-user', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD']]) {
+
                         sh "nais validate"
                         sh "nais upload --app nais-test -v 1.0.${env.BUILD_ID}"
-                    }
+
                 }
             }
         }
