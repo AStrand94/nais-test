@@ -42,11 +42,11 @@ pipeline {
             }
         }
 
-        stage('deploy to nice') {
+        stage('deploy to nais') {
             steps {
                 script {
 
-                        sh "nais deploy -c preprod-fss -z fss -a nais-test -v 1.0.${env.BUILD_ID} --skip-fasit --wait"
+                        sh "nais deploy -c preprod-fss -z fss -a nais-test -v 1.0.${env.BUILD_ID} --skip-fasit"
 
                 }
             }
