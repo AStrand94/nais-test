@@ -23,7 +23,7 @@ pipeline {
                 script {
                     checkout scm
                     docker.withRegistry('https://docker.adeo.no:5000/') {
-                        def image = docker.build("nais-test:1.0.${env.BUILD_ID}")
+                        def image = docker.build("nais-test:1.0.${env.BUILD_ID}", "--build-arg JAR_FILE=nais-test-0.0.1-SNAPSHOT.jar")
                         image.push()
                         image.push 'latest'
                     }
