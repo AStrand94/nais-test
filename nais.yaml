@@ -1,0 +1,19 @@
+name: nais-test
+image: docker.adeo.no:5000/nais-test
+replicas:
+  min: 1
+  max: 2
+port: 8080
+
+healthcheck: # Optional
+    liveness:
+      path: /actuator/health
+      initialDelay: 60
+      timeout: 5
+      periodSeconds: 10     # How often (in seconds) to perform the probe. Default to 10 seconds
+      failureThreshold: 5
+
+    readiness:
+      path: /actuator/health
+      initialDelay: 60
+      timeout: 5
