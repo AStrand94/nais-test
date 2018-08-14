@@ -6,14 +6,13 @@ WORKDIR /usr/src/app
 RUN npm config set strict-ssl false
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 ENV HTTP_PROXY=${PROXY}
-ENV HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088/
+ENV HTTPS_PROXY=${PROXY}
 COPY package.json /usr/src/app/package.json
 RUN npm install
 RUN npm install react-scripts@1.1.1 -g --silent
 COPY . /usr/src/app
 RUN npm run build
-
-# Production environment
+ # Production environment
 FROM nginx:1.13.9-alpine
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 EXPOSE 80
