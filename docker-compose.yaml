@@ -1,0 +1,43 @@
+version: "2.2"
+
+services:
+  myapp:
+      build:
+        context: .
+        dockerfile: Dockerfile
+        args:
+          JAR_FILE: nais-test-0.0.1-SNAPSHOT.jar
+          SPRING_PROFILES_ACTIVE: local
+      image: nais-test:0.2
+      container_name: myapp
+      hostname: myapp
+      links:
+        - redis
+      ports:
+        - "8080:8080"
+      depends_on:
+        - redis
+      environment:
+        - APP_REDIS_HOST=redis
+        - APP_REDIS_PORT=6379
+  redis:
+    image: 'bitnami/redis:latest'
+    container_name: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
+
+  frontend:
+    image: 'react-test:0.2'
+    container_name: frontend
+    hostname: frontend
+    ports:
+      - "80:3000"
+    depends_on:
+      - myapp
+    links:
+      - myapp
+

@@ -3,6 +3,24 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+
+    constructor(props){
+        super(props);
+        this.state = {
+            info: "NOT OK"
+        };
+    }
+
+    componentDidMount(){
+        fetch("/api/test")
+            // .then(res => res.json())
+            .then((result) => {
+                this.state.info = result.toString();
+                alert(this.state.info);
+            });
+    }
+
   render() {
     return (
       <div className="App">

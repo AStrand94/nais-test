@@ -2,7 +2,6 @@ FROM navikt/java:8
 MAINTAINER Andreas Strand andreas.strand@nav.no
 
 ARG JAR_FILE
-RUN echo ${JAR_FILE}
 COPY target/${JAR_FILE} app.jar
 
 ARG SPRING_PROFILES_ACTIVE

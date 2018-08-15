@@ -17,3 +17,5 @@ healthcheck: # Optional
       path: /actuator/health
       initialDelay: 60
       timeout: 5
+
+redis: true
