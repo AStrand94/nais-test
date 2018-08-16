@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import PersonCtrl from './person/PersonCtrl'
 
 class App extends Component {
 
@@ -12,14 +13,6 @@ class App extends Component {
         };
     }
 
-    componentDidMount(){
-        fetch("/api/test")
-            // .then(res => res.json())
-            .then((result) => {
-                this.state.info = result.toString();
-                alert(this.state.info);
-            });
-    }
 
   render() {
     return (
@@ -31,6 +24,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+          <PersonCtrl/>
       </div>
     );
   }
