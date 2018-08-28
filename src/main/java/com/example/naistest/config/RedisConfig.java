@@ -46,6 +46,8 @@ public class RedisConfig {
     JedisConnectionFactory jedisConnectionFactory() {
 
         JedisConnectionFactory factory;
+        System.out.println(redisHostName);
+        System.out.println(redisPort);
 
         boolean isLocalDev = true;/*Arrays.stream(environment.getActiveProfiles()).anyMatch(
                 env -> (env.equalsIgnoreCase("test")

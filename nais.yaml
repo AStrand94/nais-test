@@ -5,7 +5,7 @@ replicas:
   max: 2
 port: 8080
 
-healthcheck: # Optional
+healthcheck:
     liveness:
       path: /actuator/health
       initialDelay: 60
