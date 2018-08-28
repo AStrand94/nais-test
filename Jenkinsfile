@@ -8,13 +8,13 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'mvn -B -DskipTest clean package'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
         stage('test') {
             steps {
-                sh 'mvn test'
+                sh 'mvn test -e APP_REDIS_PORT=6379 -e APP_REDIS_HOST=redis'
             }
         }
 

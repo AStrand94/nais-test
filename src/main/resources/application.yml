@@ -5,7 +5,7 @@ server:
 
 spring:
     redis:
-      host: ${APP_REDIS_HOST}
-      port: ${APP_REDIS_PORT}
+      host: ${APP_REDIS_HOST:rfs-nais-test}
+      port: ${APP_REDIS_PORT:26379}
       sentinel:
         master: mymaster
