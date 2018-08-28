@@ -19,6 +19,8 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
 
+import java.util.Arrays;
+
 
 @Configuration
 @PropertySource("classpath:application.yml")
@@ -46,13 +48,11 @@ public class RedisConfig {
     JedisConnectionFactory jedisConnectionFactory() {
 
         JedisConnectionFactory factory;
-        System.out.println(redisHostName);
-        System.out.println(redisPort);
 
-        boolean isLocalDev = true;/*Arrays.stream(environment.getActiveProfiles()).anyMatch(
+        boolean isLocalDev = Arrays.stream(environment.getActiveProfiles()).anyMatch(
                 env -> (env.equalsIgnoreCase("test")
                         || env.equalsIgnoreCase("local")) );
-*/
+
         if (isLocalDev) {
 
             RedisStandaloneConfiguration standaloneConfiguration =
