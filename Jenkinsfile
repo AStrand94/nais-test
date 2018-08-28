@@ -14,7 +14,7 @@ pipeline {
 
         stage('test') {
             steps {
-                sh 'mvn test -e APP_REDIS_PORT=6379 -e APP_REDIS_HOST=redis'
+                sh 'mvn test'
             }
         }
 
