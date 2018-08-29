@@ -33,7 +33,7 @@ pipeline {
                 script {
                     checkout scm
                     docker.withRegistry('https://docker.adeo.no:5000/') {
-                        def image = docker.build("nais-test-frontend:1.0.${env.BUILD_ID}", "--build-arg PROXY='http://webproxy-utvikler.nav.no:8088'")
+                        def image = docker.build("nais-test-frontend:1.0.${env.BUILD_ID}", "--build-arg PROXY='http://webproxy-utvikler.nav.no:8088' .")
                         image.push()
                         image.push 'latest'
                     }
