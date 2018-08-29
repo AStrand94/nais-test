@@ -3,4 +3,4 @@ image: docker.adeo.no:5000/nais-test-frontend
 replicas:
   min: 1
   max: 2
-port: 80
+port: 3000
