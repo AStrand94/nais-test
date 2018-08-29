@@ -31,11 +31,12 @@ pipeline {
         stage('deploy frontend docker image') {
             steps {
                 script {
-                    checkout scm
-                    docker.withRegistry('https://docker.adeo.no:5000/') {
-                        def image = docker.build("nais-test-frontend:1.0.${env.BUILD_ID}", "--build-arg PROXY='http://webproxy-utvikler.nav.no:8088' .")
-                        image.push()
-                        image.push 'latest'
+                    dir('frontend'){
+                        docker.withRegistry('https://docker.adeo.no:5000/') {
+                            def image = docker.build("nais-test-frontend:1.0.${env.BUILD_ID}", "--build-arg PROXY='http://webproxy-utvikler.nav.no:8088' .")
+                            image.push()
+                            image.push 'latest'
+                        }
                     }
                 }
             }
@@ -48,6 +49,7 @@ pipeline {
                         sh "nais upload --app nais-test -v 1.0.${env.BUILD_ID}"
 
                         dir('frontend'){
+                            sh 'pwd'
                             sh "nais validate"
                             sh "nais upload --app nais-test-frontend -v 1.0.${env.BUILD_ID}"
                         }
@@ -60,10 +62,7 @@ pipeline {
                 script {
 
                         sh "nais deploy -c preprod-fss -z fss -a nais-test -v 1.0.${env.BUILD_ID} --skip-fasit"
-
-                        dir('frontend'){
-                            sh "nais deploy -c preprod-fss -z fss -a nais-test-frontend -v 1.0.${env.BUILD_ID} --skip-fasit"
-                        }
+                        sh "nais deploy -c preprod-fss -z fss -a nais-test-frontend -v 1.0.${env.BUILD_ID} --skip-fasit"
 
                 }
             }
