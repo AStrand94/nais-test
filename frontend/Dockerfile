@@ -1,14 +1,14 @@
 FROM node:10.8.0-alpine
 
 WORKDIR /usr/src/app
-COPY package*.json ./
+COPY . .
 RUN npm config set strict-ssl false
 ARG PROXY
 ENV HTTP_PROXY=${PROXY}
 ENV HTTPS_PROXY=${PROXY}
 RUN npm install
+RUN npm run build
 
-COPY . .
 EXPOSE 3000
 CMD ["npm", "start"]
 
