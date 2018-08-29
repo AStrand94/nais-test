@@ -1,7 +1,7 @@
 version: "2.2"
 
 services:
-  myapp:
+  nais-test:
       build:
         context: .
         dockerfile: Dockerfile
@@ -9,8 +9,8 @@ services:
           JAR_FILE: nais-test-0.0.1-SNAPSHOT.jar
           SPRING_PROFILES_ACTIVE: local
       image: nais-test:0.2
-      container_name: myapp
-      hostname: myapp
+      container_name: nais-test
+      hostname: nais-test
       links:
         - redis
       ports:
@@ -37,7 +37,7 @@ services:
     ports:
       - "80:3000"
     depends_on:
-      - myapp
+      - nais-test
     links:
-      - myapp
+      - nais-test
 
