@@ -16,7 +16,7 @@ const server = express();
 server.use(express.static(path.join(__dirname, './build')));
 server.get('/nais-test-frontend/health', (req, res) => res.sendStatus(200));
 
-var apiProxy = proxy('/api', {target: 'http://nais-test/api'});
+var apiProxy = proxy('/api', {target: 'https://nais-test/api'});
 server.use(apiProxy);
 
 server.listen(3000, '0.0.0.0', () => {
