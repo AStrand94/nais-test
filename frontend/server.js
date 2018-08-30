@@ -1,23 +1,13 @@
-
 const express = require('express');
-const proxy = require('express-http-proxy');
-
+const proxy = require('http-proxy-middleware');
 const path = require('path');
-
-const currentDirectory = __dirname;
-console.log(__dirname);
-console.log(path.join(__dirname, 'build'));
-console.log(path.join(__dirname, '/build'));
-console.log(path.join(__dirname, './build'));
-
-
 const server = express();
 
 server.use(express.static(path.join(__dirname, './build')));
+
 server.get('/nais-test-frontend/health', (req, res) => res.sendStatus(200));
 
-var apiProxy = proxy('/api', {target: 'https://nais-test/api'});
-server.use(apiProxy);
+server.use(proxy('/api', {target: 'https://nais-test/'}));
 
 server.listen(3000, '0.0.0.0', () => {
     console.log('Started')
